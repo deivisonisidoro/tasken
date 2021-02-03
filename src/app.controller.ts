@@ -7,6 +7,6 @@ export class AppController {
 
   @Get()
   async getHello(): Promise<string> {
-    return `Total product are ${await this.repoService.productRepo.count()}`;
+    return `Total products are ${await this.repoService.productRepo.count()}`;
   }
 }

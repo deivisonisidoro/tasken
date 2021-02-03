@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType, ID, Int } from '@nestjs/graphql';
 import {
   Column,
   CreateDateColumn,
@@ -10,7 +10,7 @@ import {
 @ObjectType()
 @Entity({ name: 'products' })
 export default class Product {
-  @Field()
+  @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -22,11 +22,11 @@ export default class Product {
   @Column()
   manufacturer: string;
 
-  @Field()
+  @Field(() => Int)
   @Column({ name: 'stock_quantity' })
   stockQuantity: number;
 
-  @Field()
+  @Field(() => Int)
   @Column()
   price: number;
 

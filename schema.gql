@@ -3,11 +3,11 @@
 # ------------------------------------------------------
 
 type Product {
-  id: Float!
+  id: ID!
   productName: String!
   manufacturer: String!
-  stockQuantity: Float!
-  price: Float!
+  stockQuantity: Int!
+  price: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -19,19 +19,21 @@ scalar DateTime
 
 type Query {
   getProducts: [Product!]!
-  product(id: Float!): Product
+  getProduct(id: Float!): Product
+  getQuantityProduct: [Product!]
 }
 
 type Mutation {
   createProduct(data: ProductInput!): Product!
+  updateProduct(data: ProductInput!, id: String!): Product
   deleteProduct(data: DeleteProduct!): Product
 }
 
 input ProductInput {
   product_name: String!
   manufacturer: String!
-  stock_quantity: Float!
-  price: Float!
+  stock_quantity: Int!
+  price: Int!
 }
 
 input DeleteProduct {
