@@ -8,8 +8,8 @@ import {
 } from 'typeorm';
 
 @ObjectType()
-@Entity()
-export default class Products {
+@Entity({ name: 'products' })
+export default class Product {
   @Field()
   @PrimaryGeneratedColumn()
   id: number;
@@ -24,11 +24,11 @@ export default class Products {
 
   @Field()
   @Column({ name: 'stock_quantity' })
-  stockQuantity: string;
+  stockQuantity: number;
 
   @Field()
   @Column()
-  price: string;
+  price: number;
 
   @Field()
   @CreateDateColumn({ name: 'created_at' })
