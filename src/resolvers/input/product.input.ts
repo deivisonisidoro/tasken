@@ -1,7 +1,7 @@
 import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
-class ProductInput {
+export class ProductInput {
   @Field()
   readonly product_name: string;
 
@@ -15,4 +15,8 @@ class ProductInput {
   readonly price: number;
 }
 
-export default ProductInput;
+@InputType()
+export class DeleteProduct {
+  @Field()
+  readonly id: number;
+}

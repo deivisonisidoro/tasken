@@ -23,7 +23,8 @@ type Query {
 }
 
 type Mutation {
-  createAuthor(data: ProductInput!): Product!
+  createProduct(data: ProductInput!): Product!
+  deleteProduct(data: DeleteProduct!): Product
 }
 
 input ProductInput {
@@ -31,4 +32,8 @@ input ProductInput {
   manufacturer: String!
   stock_quantity: Float!
   price: Float!
+}
+
+input DeleteProduct {
+  id: Float!
 }

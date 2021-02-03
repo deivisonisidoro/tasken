@@ -1,7 +1,7 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import Product from 'src/db/models/product.entity';
 import RepoService from '../repo.service';
-import ProductInput from './input/product.input';
+import { DeleteProduct, ProductInput } from './input/product.input';
 @Resolver()
 export default class ProductResolver {
   constructor(private readonly repoService: RepoService) {}
@@ -16,7 +16,7 @@ export default class ProductResolver {
   }
 
   @Mutation(() => Product)
-  public async createAuthor(
+  public async createProduct(
     @Args('data') input: ProductInput,
   ): Promise<Product> {
     const product = this.repoService.productRepo.create({
@@ -26,5 +26,18 @@ export default class ProductResolver {
       price: input.price,
     });
     return this.repoService.productRepo.save(product);
+  }
+  @Mutation(() => Product, { nullable: true })
+  public async deleteProduct(
+    @Args('data') input: DeleteProduct,
+  ): Promise<Product> {
+    const product = await this.repoService.productRepo.findOne(input.id);
+
+    if (!product) return null;
+
+    const copy = { ...product };
+
+    await this.repoService.productRepo.remove(product);
+    return copy;
   }
 }
